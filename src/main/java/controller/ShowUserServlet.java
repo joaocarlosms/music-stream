@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ShowUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ShowUserServlet() {
+    public ShowUserServlet() { 
         super();
     }
 
@@ -25,12 +25,13 @@ public class ShowUserServlet extends HttpServlet {
     	String pPassword = request.getParameter("password");
     	String pModo = request.getParameter("modo");
     	
-    	System.out.println("User -> "+ pUser);
-    	System.out.println("Password -> "+ pPassword);
-    	System.out.println("Modo -> "+ pModo);
+    	String url = "/error.jsp";
     	
+    	if(pUser.equals("jcdev") && pPassword.equals("123")) {
+    		url = "/ok.jsp";
+    	}
     	
-    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ok.jsp");
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
     	dispatcher.forward(request, response);
     }
  
