@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
+
 /**
  * Servlet implementation class ShowUserServlet
  */
@@ -28,6 +30,14 @@ public class ShowUserServlet extends HttpServlet {
     	String url = "/error.jsp";
     	
     	if(pUser.equals("jcdev") && pPassword.equals("123")) {
+    		User usr = new User();
+    		usr.setId(1);
+    		usr.setUsername("jc");
+    		usr.setFullname("Joao Carlos");
+    		usr.setEmail("joao@gmail.com");
+    		
+    		request.setAttribute("User", usr);
+    		
     		url = "/ok.jsp";
     	}
     	
