@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +21,17 @@ public class ShowUserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	response.sendRedirect("ok.jsp");
+    	String pUser = request.getParameter("user");
+    	String pPassword = request.getParameter("password");
+    	String pModo = request.getParameter("modo");
+    	
+    	System.out.println("User -> "+ pUser);
+    	System.out.println("Password -> "+ pPassword);
+    	System.out.println("Modo -> "+ pModo);
+    	
+    	
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ok.jsp");
+    	dispatcher.forward(request, response);
     }
  
 //    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
