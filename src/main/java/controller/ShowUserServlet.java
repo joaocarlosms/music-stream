@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.User;
 
 /**
@@ -36,9 +38,15 @@ public class ShowUserServlet extends HttpServlet {
     		usr.setFullname("Joao Carlos");
     		usr.setEmail("joao@gmail.com");
     		
-    		request.setAttribute("User", usr);
-    		
-    		url = "/ok.jsp";
+    		if(pModo.equals("html")) {
+    			request.setAttribute("User", usr);        		
+        		url = "/ok.jsp";
+    		} 
+    		else {
+    			Gson json = new Gson();
+    			String result = json.toJson(usr);
+    			url = "/results.jsp";
+    		}
     	}
     	
     	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
