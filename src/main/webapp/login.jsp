@@ -247,15 +247,15 @@
             </div>
         <% } %>
         
-        <form action="${pageContext.request.contextPath}/login" method="post">
+        <form action="${pageContext.request.contextPath}/loginservlet" method="post">
             <div class="form-group">
                 <label for="email">Endereço de e-mail ou nome de usuário</label>
-                <input type="text" id="email" name="email" placeholder="Endereço de e-mail ou nome de usuário" required>
+                <input type="text" id="email" name="txtEmail" placeholder="Endereço de e-mail ou nome de usuário" required>
             </div>
             
             <div class="form-group">
                 <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Senha" required>
+                <input type="password" id="password" name="txtPassword" placeholder="Senha" required>
             </div>
             
             <div class="options">
