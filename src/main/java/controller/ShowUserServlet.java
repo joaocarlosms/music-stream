@@ -45,6 +45,8 @@ public class ShowUserServlet extends HttpServlet {
     		else {
     			Gson json = new Gson();
     			String result = json.toJson(usr);
+    			
+    			request.setAttribute("UserJSON", result);
     			url = "/results.jsp";
     		}
     	}
