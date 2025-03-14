@@ -19,7 +19,7 @@ public class UserDAO implements GenericDAO {
 		User user = new User();
 		user.setId("1");
 		user.setEmail("jcdev@gmail.com");
-		user.setName("joao");
+		user.setName("João");
 		user.setPassword("admin");
 		
 		ArrayList<Playlist> playlists = new ArrayList<>();

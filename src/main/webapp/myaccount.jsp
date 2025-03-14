@@ -1,3 +1,4 @@
+<jsp:useBean id="User" type="br.com.jc.streamusic.model.User" scope="session" />
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -172,10 +173,10 @@
             <div class="logo">MusicStream</div>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Explorar</a></li>
-                    <li><a href="#">Biblioteca</a></li>
-                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Nova Playlist</a></li>
+                    <li><a href="#">Minhas Playlists</a></li>
+                    <li><a href="#">Upload Música</a></li>
+                    <li><a href="#">Olá, ${User.name}</a></li>
                 </ul>
             </nav>
         </header>
