@@ -174,7 +174,7 @@
             <nav>
                 <ul>
                     <li><a href="#">Nova Playlist</a></li>
-                    <li><a href="#">Minhas Playlists</a></li>
+                    <li><a href="${pageContext.request.contextPath}/myplaylists">Minhas Playlists</a></li>
                     <li><a href="#">Upload Música</a></li>
                     <li><a href="#">Olá, ${User.name}</a></li>
                 </ul>
