@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Objects;
 
 public class User implements java.io.Serializable {
-	private String id;
+	private int id;
 	private String name;
 	private String email;
 	private String password;
 	private List<Playlist> playlist;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

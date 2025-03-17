@@ -1,5 +1,7 @@
 package br.com.jc.streamusic.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,28 @@ public class UserDAO implements GenericDAO {
 	public List<Object> read(Object obj) {
 		try {
 			if(obj instanceof User) {
+				User usr = (User) obj;
+				String sql = "SELECT * FROM tbluser WHERE email = ? AND password = ?;";
+				PreparedStatement stmt = dataSource.getConnection().prepareStatement(sql);
+				stmt.setString(1, usr.getEmail());
+				stmt.setString(2, usr.getPassword());
+				ResultSet rs = stmt.executeQuery();
 				
-			}
+				ArrayList<Object> result = new ArrayList<Object>();
+				
+				if(rs.next()) {
+					User user = new User();
+					user.setId(rs.getInt("idUser"));
+					user.setName(rs.getString("nome"));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					
+					result.add(user);
+				}
+				stmt.close();
+				rs.close();
+				return result;
+			}	
 			else {
 				throw new RuntimeException("Invalid Object");
 			}

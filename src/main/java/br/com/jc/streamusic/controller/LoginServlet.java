@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.jc.streamusic.dao.DataSource;
 import br.com.jc.streamusic.dao.UserDAO;
 import br.com.jc.streamusic.model.User;
 
@@ -29,25 +30,32 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_email = request.getParameter("txtEmail");
 		String user_password = request.getParameter("txtPassword");
-		String url;
+		String url = "/error.jsp";
+		User usr = new User();
+		DataSource ds;
 		
 		System.out.println("Email: "+ user_email);
 		System.out.println("Password: "+ user_password);
 		
-		if(user_email.equals("jcdev@gmail.com") && user_password.equals("admin")) {
-			/* simulate recovery database */
-			List<Object> res;
-			UserDAO userDAO = new UserDAO();
-			res = userDAO.read(null);
+		usr.setEmail(user_email);
+		usr.setPassword(user_password);
+		
+		try { 
+			ds = new DataSource();
+			UserDAO userDAO = new UserDAO(ds);
+			List<Object> res = userDAO.read(usr);
 			
-			request.getSession().setAttribute("User", res.get(0));
-			
-			url = "/myaccount.jsp";
-			
-		}
-		else {
-			request.setAttribute("errorSTR", "E-mail / Senha não encontrados");
-			url = "/error.jsp";
+			if(res != null && res.size() > 0) {
+				url = "/myaccount.jsp";
+				request.getSession().setAttribute("User", res.get(0));
+			}
+			else {
+				request.setAttribute("errorSTR", "Usuario / Senha inválidos");
+			}
+			ds.getConnection().close();
+		} 
+		catch(Exception e) {
+			request.setAttribute("errorSTR", "Erro ao recuperar");
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
