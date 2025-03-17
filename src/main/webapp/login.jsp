@@ -291,7 +291,7 @@
             </div>
             
             <div class="signup">
-                Não tem uma conta? <a href="${pageContext.request.contextPath}/cadastro">Inscrever-se no MusicStream</a>
+                Não tem uma conta? <a href="${pageContext.request.contextPath}/newuser.jsp">Inscrever-se no MusicStream</a>
             </div>
         </form>
     </div>
