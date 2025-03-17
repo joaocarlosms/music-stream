@@ -3,8 +3,11 @@ package br.com.jc.streamusic.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.management.RuntimeErrorException;
 
 import br.com.jc.streamusic.model.Music;
 import br.com.jc.streamusic.model.Playlist;
@@ -19,7 +22,34 @@ public class UserDAO implements GenericDAO {
 	
 	@Override
 	public void create(Object obj) {
-
+		try {
+			if(obj instanceof User) {
+				User user = (User) obj;
+				String sql = "INSERT INTO tbluser VALUES (null, ?, ?, ?);";
+				PreparedStatement stmt = dataSource.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1, user.getName());
+				stmt.setString(2, user.getEmail());
+				stmt.setString(3, user.getPassword());
+				
+				int res = stmt.executeUpdate();
+				
+				if(res != 0) {
+					ResultSet rs = stmt.getGeneratedKeys();
+					
+					if(rs.next()) {
+						user.setId(rs.getInt(1));
+					}
+					rs.close();
+				}
+				stmt.close();
+			}
+			else {
+				throw new RuntimeException("Invalid User Model Object");
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Erro ao inserir user"+e.getMessage());
+		}
 	}
 
 	@Override
