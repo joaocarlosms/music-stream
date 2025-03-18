@@ -332,7 +332,7 @@
             </div>
             
             <div class="login">
-                Já tem uma conta? <a href="${pageContext.request.contextPath}/login">Faça login</a>
+                Já tem uma conta? <a href="${pageContext.request.contextPath}/login.jsp">Faça login</a>
             </div>
         </form>
     </div>
