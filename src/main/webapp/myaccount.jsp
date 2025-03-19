@@ -173,7 +173,7 @@
             <div class="logo">MusicStream</div>
             <nav>
                 <ul>
-                    <li><a href="#">Nova Playlist</a></li>
+                    <li><a href="${pageContext.request.contextPath}/newplaylist">Nova Playlist</a></li>
                     <li><a href="${pageContext.request.contextPath}/myplaylists">Minhas Playlists</a></li>
                     <li><a href="#">Upload Música</a></li>
                     <li><a href="#">Logout</a></li>

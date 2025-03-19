@@ -201,24 +201,19 @@
             <div class="logo">MusicStream</div>
             <nav>
                 <ul>
-                    <li><a href="index.jsp">Home</a></li>
-                    <li><a href="explore.jsp">Explorar</a></li>
-                    <li><a href="playlists.jsp">Biblioteca</a></li>
-                    <li><a href="profile.jsp">Perfil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/newplaylist">Nova Playlist</a></li>
+                    <li><a href="${pageContext.request.contextPath}/myplaylists">Minhas Playlists</a></li>
+                    <li><a href="#">Upload Música</a></li>
+                    <li><a href="#">Logout</a></li>
+                    <li><a href="#">Olá, ${User.name}</a></li>
                 </ul>
             </nav>
         </header>
         
         <h1 class="page-title">Minhas Playlists</h1>
-        <a href="create-playlist.jsp" class="btn">+ Nova Playlist</a>
+        <a href="${pageContext.request.contextPath}/newplaylist" class="btn">+ Nova Playlist</a>
         
         <div class="playlist-grid">
-            <div class="playlist-card create-playlist">
-                <div class="create-playlist-icon">+</div>
-                <h3>Criar Playlist</h3>
-                <p>Comece a organizar suas músicas favoritas</p>
-            </div>
-            
             <div class="playlist-card">
                 <img src="https://via.placeholder.com/200" alt="Playlist 1">
                 <h3>Melhores do Rock</h3>

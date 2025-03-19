@@ -247,7 +247,7 @@
             </div>
         <% } %>
         
-        <form action="${pageContext.request.contextPath}/loginservlet" method="post">
+        <form action="${pageContext.request.contextPath}/home" method="post">
             <div class="form-group">
                 <label for="email">Endereço de e-mail ou nome de usuário</label>
                 <input type="text" id="email" name="txtEmail" placeholder="Endereço de e-mail ou nome de usuário" required>

@@ -15,7 +15,7 @@ import br.com.jc.streamusic.dao.DataSource;
 import br.com.jc.streamusic.dao.UserDAO;
 import br.com.jc.streamusic.model.User;
 
-@WebServlet("/loginservlet")
+@WebServlet("/home")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
