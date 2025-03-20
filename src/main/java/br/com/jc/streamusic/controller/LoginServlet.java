@@ -23,9 +23,17 @@ public class LoginServlet extends HttpServlet {
         super();
     }
 
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = (User) request.getSession().getAttribute("User");
+		String url = "/login.jsp";
+		
+		if(user != null) {
+			url = "/myaccount.jsp";
+		}
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
+		dispatcher.forward(request, response);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_email = request.getParameter("txtEmail");

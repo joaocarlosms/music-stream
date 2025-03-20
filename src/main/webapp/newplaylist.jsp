@@ -328,6 +328,7 @@
         </div>
         
         <ul class="nav-links">
+			<li><a href="${pageContext.request.contextPath}/home">Home</a></li>
             <li><a href="${pageContext.request.contextPath}/newplaylist">Nova Playlist</a></li>
             <li><a href="${pageContext.request.contextPath}/myplaylists">Minhas Playlists</a></li>
             <li><a href="#">Upload Música</a></li>
@@ -370,26 +371,5 @@
             </form>
         </div>
     </div>
-    
-    <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    var preview = document.getElementById('coverPreview');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    
-                    var uploadIcon = document.querySelector('.upload-icon');
-                    var uploadText = document.querySelector('.upload-text');
-                    uploadIcon.style.display = 'none';
-                    uploadText.style.display = 'none';
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 </body>
 </html>
