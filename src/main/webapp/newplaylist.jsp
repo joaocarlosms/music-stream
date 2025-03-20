@@ -348,55 +348,23 @@
         
         <h1 class="page-title">Criar uma playlist</h1>
         
-        <% if (request.getAttribute("error") != null) { %>
             <div class="error-message">
-                <%= request.getAttribute("error") %>
+				<h1>${errorSTR}</h1>
             </div>
-        <% } %>
         
         <div class="create-playlist-form">
-            <form action="${pageContext.request.contextPath}/effectplaylist" method="post" enctype="multipart/form-data">
+            <form action="${pageContext.request.contextPath}/effectplaylist" method="post">
                 <div style="display: flex; gap: 30px; margin-bottom: 30px;">
-                    <div class="upload-cover">
-                        <input type="file" id="cover" name="playlistCover" accept="image/*" onchange="previewImage(this);">
-                        <span class="upload-icon">🖼️</span>
-                        <p class="upload-text">Escolher imagem</p>
-                        <img id="coverPreview" class="cover-preview" src="#" alt="Capa da playlist">
-                    </div>
-                    
                     <div style="flex-grow: 1;">
                         <div class="form-group">
-                            <label for="titulo">Título da playlist *</label>
+                            <label for="titulo">Título da playlist:</label>
                             <input type="text" id="titulo" name="playlistTitle" placeholder="Minha playlist" required>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="descricao">Descrição</label>
-                            <textarea id="descricao" name="playlistDescription" placeholder="Adicione uma descrição opcional..."></textarea>
-                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Privacidade</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="publica" name="privacy" value="public" checked>
-                            <label for="publica">Pública</label>
-                        </div>
-                
-                        <div class="radio-option">
-                            <input type="radio" id="privada" name="privacy" value="private">
-                            <label for="privada">Privada</label>
-                        </div>
-                    </div>
-                    <p style="margin-top: 8px; font-size: 12px; color: #b3b3b3;">
-                        Qualquer pessoa pode encontrar playlists públicas. Apenas você pode ver playlists privadas.
-                    </p>
                 </div>
                 
                 <div class="form-buttons">
-                    <button type="button" class="secondary-btn" onclick="location.href='${pageContext.request.contextPath}/biblioteca'">Cancelar</button>
+                    <button type="button" class="secondary-btn" onclick="location.href='${pageContext.request.contextPath}/home">Cancelar</button>
                     <button type="submit" class="btn">Criar</button>
                 </div>
             </form>

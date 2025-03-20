@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Playlist implements java.io.Serializable {
-	private String id;
+	private int id;
 	private String title;
+	private User user;
 	private List<Music> musics;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -30,6 +31,14 @@ public class Playlist implements java.io.Serializable {
 
 	public void setMusics(List<Music> musics) {
 		this.musics = musics;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
