@@ -328,7 +328,7 @@
         </div>
         
         <ul class="nav-links">
-			<li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+			<li><a href="${pageContext.request.contextPath}/home">Início</a></li>
             <li><a href="${pageContext.request.contextPath}/newplaylist">Nova Playlist</a></li>
             <li><a href="${pageContext.request.contextPath}/myplaylists">Minhas Playlists</a></li>
             <li><a href="#">Upload Música</a></li>
