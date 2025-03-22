@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import br.com.jc.streamusic.dao.DataSource;
+import br.com.jc.streamusic.dao.MusicDAO;
+import br.com.jc.streamusic.model.Music;
+
 /**
 * Servlet implementation class MusicUploadServlet
 */
@@ -67,6 +71,7 @@ public class MusicUploadServlet extends HttpServlet {
                 System.out.println("File name: " + filePath);
                 
                 InputStream fileContent = filePart.getInputStream();
+                String nameFileOriginal = request.getPart("musicFile").getSubmittedFileName();
                 FileOutputStream fileMP3 = new FileOutputStream(filePath);
                 
                 byte[] buffer = new byte[1024];
@@ -79,7 +84,21 @@ public class MusicUploadServlet extends HttpServlet {
                 fileContent.close();
                 fileMP3.close();
                 
-                System.out.println("Musica salva com sucesso!");
+                Music music = new Music();
+                music.setTitle(title);
+                music.setAlbum(album);
+                music.setArtist(artist);
+                music.setStyle(style);
+                music.setLinkMP3("musics/"+nameFileOriginal);
+                
+                System.out.println(music);
+                
+                DataSource dataSource = new DataSource();
+                MusicDAO musicDAO = new MusicDAO(dataSource);
+                musicDAO.create(music);
+                
+                dataSource.getConnection().close();
+                url = "/myaccount.jsp";
                 
             } catch(Exception e) {
                 request.setAttribute("errorSTR", "Erro: Upload falhou! " + e.getMessage());
