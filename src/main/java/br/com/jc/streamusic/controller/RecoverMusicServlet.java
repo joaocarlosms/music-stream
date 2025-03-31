@@ -1,6 +1,7 @@
 package br.com.jc.streamusic.controller;
 
 import java.io.IOException;
+import java.security.Identity;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,6 +48,10 @@ public class RecoverMusicServlet extends HttpServlet {
 					request.setAttribute("errorSTR", "Erro ao recuperar musicas");
 				}
 				else {
+					String idPlaylist = request.getParameter("idplaylist");
+					System.out.println("DEBUG ID PLAYLIST: "+ idPlaylist);
+					request.setAttribute("idplaylist", idPlaylist);
+					
 					request.setAttribute("ListMusics", list);
 					url = "/mymusics.jsp";
 				}
