@@ -1,7 +1,9 @@
 package br.com.jc.streamusic.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.jc.streamusic.model.Music;
@@ -40,6 +42,29 @@ public class MusicDAO implements GenericDAO {
 
 	@Override
 	public List<Object> read(Object obj) {
+		try {
+			String SQL = "SELECT * FROM tblmusic ORDER BY title";
+			PreparedStatement stmt = dataSource.getConnection().prepareStatement(SQL);
+			ResultSet rs = stmt.executeQuery();
+			List<Object> list = new ArrayList<Object>();
+			
+			while(rs.next()) {
+				Music music = new Music();
+				music.setId(rs.getInt("idMusic"));
+				music.setTitle(rs.getString("title"));
+				music.setArtist(rs.getString("artist"));
+				music.setAlbum(rs.getString("album"));
+				music.setStyle(rs.getInt("style"));
+				music.setLinkMP3(rs.getString("linkMP3"));
+				list.add(music);
+			}
+			
+			return list;
+		}
+		catch(SQLException e) {
+			System.out.println("Erro ao recuperar musica: "+e.getMessage());
+		}
+		
 		return null;
 	}
 
