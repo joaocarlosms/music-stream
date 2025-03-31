@@ -307,8 +307,6 @@
                         <th>Título</th>
                         <th>Artista</th>
                         <th>Álbum</th>
-                        <th>Duração</th>
-                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -320,7 +318,6 @@
                             </td>
                             <td>${music.artist}</td>
                             <td>${music.album}</td>
-                            <td class="song-duration">${music.duration}</td>
                             <td class="song-actions">
                                 <button onclick="playMusic('${music.id}')" title="Reproduzir">▶</button>
                                 <button onclick="location.href='${pageContext.request.contextPath}/removesong?playlistId=${Playlist.id}&musicId=${music.id}'" title="Remover da playlist">✕</button>
@@ -332,7 +329,7 @@
             
             <div class="add-song-section">
                 <h2 class="section-title">Adicionar mais músicas</h2>
-                <a href="./recovermusics.jsp" class="btn">Adicionar Músicas</a>
+                <a href="${pageContext.request.contextPath}/recovermusics?idplaylist=${Playlist.id}" class="btn">Adicionar Músicas</a>
             </div>
         </c:if>
     </div>
