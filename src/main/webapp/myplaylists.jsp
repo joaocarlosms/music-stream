@@ -229,7 +229,7 @@ nav ul li a:hover {
 				<c:forEach var="playlist" items="${User.playlist}">
 					<div class="playlist-card">
 						<img src="https://i.pinimg.com/236x/cc/d8/72/ccd872e52df7be65f55145fd6a2f575a.jpg" alt="Playlist">
-						<h3>${playlist.title}</h3>
+						<h3><a href="${pageContext.request.contextPath}/playlistdetails?id=${playlist.id}">${playlist.title}</a></h3>
 						<div class="playlist-stats">
 							<span>${fn:length(playlist.musics)}</span> 
 							<span>2h 15min</span>
