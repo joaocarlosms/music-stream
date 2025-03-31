@@ -139,4 +139,25 @@ public class PlaylistDAO implements GenericDAO {
 	public void delete(Object obj) {
 
 	}
+	
+	public boolean createMusicPlaylist(int idPlaylist, int idMusic) {
+		try {
+			System.out.println("ENTROU");
+			String SQL = "INSERT INTO tblmusicplaylist VALUES (?, ?);";
+			PreparedStatement stmt = dataSource.getConnection().prepareStatement(SQL);
+			System.out.println(stmt.toString());
+			stmt.setInt(1, idPlaylist);
+			stmt.setInt(2, idMusic);
+			int result = stmt.executeUpdate();
+			
+			if(result == 1) {
+				return true;
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("Error ao inserir: "+e.getMessage());
+		}
+		
+		return false;
+	}
 }
