@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.mysql.cj.protocol.Resultset;
 
+import br.com.jc.streamusic.model.Music;
 import br.com.jc.streamusic.model.Playlist;
 
 public class PlaylistDAO implements GenericDAO {
@@ -74,6 +75,58 @@ public class PlaylistDAO implements GenericDAO {
 			System.out.println("Erro ao exibir playlists: " + e.getMessage());
 		}
 
+		return null;
+	}
+	
+	public Playlist readPlaylistDetailsById(int id) {
+		Playlist playlist = null;
+		
+		try {
+			String SQL = "SELECT tblplaylist.idPlaylist as idPlaylist, "
+					+ " tblplaylist.idUser as idUser, "
+					+ " tblplaylist.title as pl_title, "
+					+ " tblmusic.idMusic as idMusic, "
+					+ " tblmusic.title as mu_title, "
+					+ " tblmusic.artist as artist, "
+					+ " tblmusic.album as album, "
+					+ " tblmusic.style as style, "
+					+ "tblmusic.linkMP3 as linkMP3"
+					+ " FROM "
+					+ " tblplaylist "
+					+ " LEFT OUTER JOIN tblmusicplaylist USING (idPlaylist) "
+					+ " LEFT OUTER JOIN tblmusic USING (idMusic)"
+					+ " WHERE idPlaylist = ?;";
+			PreparedStatement stmt = dataSource.getConnection().prepareStatement(SQL);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+			
+			do {
+				if(playlist == null) {
+					playlist = new Playlist();
+					playlist.setMusics(new ArrayList<Music>());
+					playlist.setId(id);
+					playlist.setTitle(rs.getString("pl_title"));
+				}
+				
+				if(rs.getString("mu_title") != null) {
+					Music music = new Music();
+					music.setId(rs.getInt("idMusic"));
+					music.setTitle(rs.getString("mu_title"));
+					music.setArtist(rs.getString("artist"));
+					music.setAlbum(rs.getString("album"));
+					music.setStyle(rs.getInt("style"));
+					music.setLinkMP3(rs.getString("linkMP3"));
+					playlist.getMusics().add(music);
+				}
+			} while(rs.next());
+
+			return playlist;
+		}
+		catch(Exception e) {
+			System.out.println("Erro ao recuperar playlists: "+e.getMessage());
+		} 
+		
 		return null;
 	}
 
