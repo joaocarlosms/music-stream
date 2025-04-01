@@ -42,7 +42,6 @@ public class RecoverMusicServlet extends HttpServlet {
 				DataSource dataSource = new DataSource();
 				MusicDAO musDAO = new MusicDAO(dataSource);
 				List<Object> list = musDAO.read(null);
-				System.out.println(list);
 				
 				if(list == null) {
 					request.setAttribute("errorSTR", "Erro ao recuperar musicas");
