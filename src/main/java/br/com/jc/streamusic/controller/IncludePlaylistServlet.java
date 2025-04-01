@@ -1,6 +1,7 @@
 package br.com.jc.streamusic.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.jc.streamusic.dao.DataSource;
 import br.com.jc.streamusic.dao.PlaylistDAO;
+import br.com.jc.streamusic.model.Playlist;
 
 /**
  * Servlet implementation class IncludePlaylistServlet
@@ -28,31 +30,26 @@ public class IncludePlaylistServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/result.jsp";
-		
+		DataSource dataSource = null;
 		
 		try {
-			String idPlaylistParam = request.getParameter("idplaylist");
-	        String idMusicParam = request.getParameter("musicId");
+	        int idMusic = Integer.parseInt(request.getParameter("musicId"));
+	        Playlist playlist = (Playlist) request.getSession().getAttribute("Playlist");
 	        
-	        if (idPlaylistParam == null || idMusicParam == null) {
-	            throw new IllegalArgumentException("Parâmetros não fornecidos");
+	        if(playlist != null) {
+	        	request.getSession().setAttribute("Playlist", playlist);
+	        }
+	        else {
+	        	request.setAttribute("strRESULT", "ERRO Playlist");
 	        }
 	        
-	        // Passo 2: Validar valores não vazios
-	        if (idPlaylistParam.isEmpty() || idMusicParam.isEmpty()) {
-	            throw new IllegalArgumentException("IDs não podem ser vazios");
-	        }
 	        
-	        // Passo 3: Converter para inteiro
-	        int idPlaylist = Integer.parseInt(idPlaylistParam);
-	        int idMusic = Integer.parseInt(idMusicParam);
-			
-			System.out.println("id playlist:"+idPlaylist);
+			System.out.println("id playlist:"+playlist.getId());
 
-			DataSource dataSource = new DataSource();
+			dataSource = new DataSource();
 			PlaylistDAO plDAO = new PlaylistDAO(dataSource);
 			
-			if(plDAO.createMusicPlaylist(idPlaylist, idMusic)) {
+			if(plDAO.createMusicPlaylist(playlist.getId(), idMusic)) {
 				request.setAttribute("strRESULT", "OK");
 			}
 			else {
@@ -62,6 +59,15 @@ public class IncludePlaylistServlet extends HttpServlet {
 			dataSource.getConnection().close();
 		}
 		catch(Exception e) {
+			try {
+				if(dataSource != null) {
+					dataSource.getConnection().close();
+				}
+			}
+			catch(SQLException ex) {
+				ex.printStackTrace();
+			}
+			
 			e.printStackTrace();
 			request.setAttribute("strRESULT", "Erro ao inserir musica na playlist");
 		}
