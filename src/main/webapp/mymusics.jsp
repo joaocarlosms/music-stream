@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" %>
 <jsp:useBean id="User" type="br.com.jc.streamusic.model.User" scope="session" />
 <jsp:useBean id="ListMusics" type="java.util.List" scope="request" />
-<jsp:useBean id="idPlaylist" class="java.lang.String" scope="request" />
+<jsp:useBean id="Playlist" type="br.com.jc.streamusic.model.Playlist" scope="session" />
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -197,7 +197,10 @@
                         	<c:if test="${music.style == 12}">Outro</c:if>
                         </p>
                         <div class="music-actions">
-                        	<button onclick="location.href='${pageContext.request.contextPath}/includeplaylist?musicId=${music.id}&idplaylist=${idPlaylist}'" title="Adicionar à Playlist">➕</button>
+                        	<%
+                        		String idPlaylist = Integer.toString(Playlist.getId());
+                        	%>
+                        	<button onclick="location.href='${pageContext.request.contextPath}/includeplaylist?playlistId=${idPlaylist}&musicId=${music.id}'" title="Adicionar à Playlist">➕</button>
                             <button onclick="playMusic('${music.id}')" title="Reproduzir">▶</button>
                             <button onclick="location.href='${pageContext.request.contextPath}/removemusic?id=${music.id}'" title="Remover">✕</button>
                         </div>
@@ -211,6 +214,11 @@
             // Implementar a lógica para reproduzir a música
             console.log("Reproduzindo música: " + musicId);
         }
+    </script>
+    <script>
+	    function addMusic(idPlaylist, idMusic) {
+	    	alert("Recebi os valores Playlist = "+idPlaylist+" Musica = "+idMusic);
+	    }
     </script>
 </body>
 </html>
