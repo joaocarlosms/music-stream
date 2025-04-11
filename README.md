@@ -42,7 +42,7 @@ MusicStream é uma plataforma web que permite aos usuários criar e gerenciar pl
 ### Pré-requisitos
 
 - JDK 11 ou superior
-- Servidor de aplicação Java EE (Tomcat, Glassfish, etc.)
+- Servidor de aplicação Java EE (Tomcat)
 - MySQL ou outro banco de dados relacional
 
 ## 🚀 Desenvolvimento Futuro
